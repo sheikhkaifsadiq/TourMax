@@ -1,0 +1,16 @@
+name: Keep Server Alive
+on:
+  schedule:
+    # Runs every 10 minutes
+    - cron: '*/10 * * * *'
+  workflow_dispatch: # Allows manual triggering
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping Vercel Deployment
+        run: |
+          # Replace with your actual deployed Vercel URL
+          curl -sS https://your-app-url.vercel.app/api/trpc/tours.list?input=%7B%22limit%22%3A1%2C%22offset%22%3A0%7D > /dev/null
+          echo "Pinged successfully"
